@@ -10,6 +10,8 @@ import SwiftUI
 struct LoginView: View {
     @Environment(AuthManager.self) private var authManager
     
+    @Namespace var namespace
+    
     @State private var email = ""
     @State private var password = ""
     @State private var isLoading = false
@@ -63,6 +65,7 @@ struct LoginView: View {
                 NavigationLink {
                     RegistrationView()
                         .navigationBarBackButtonHidden()
+                        .navigationTransition(.zoom(sourceID: "zoom", in: namespace))
                 } label: {
                     HStack {
                         Text("Don't have account?")
@@ -70,6 +73,7 @@ struct LoginView: View {
                         Text("Sign up")
                             .fontWeight(.semibold)
                     }
+                    .matchedTransitionSource(id: "zoom", in: namespace)
                 }
             }
             .overlay {
