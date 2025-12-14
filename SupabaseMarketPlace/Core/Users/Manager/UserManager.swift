@@ -25,7 +25,16 @@ final class UserManager {
             currentUser = try await service.fetchCurrentUser()
             print("DEBUG: current user: \(currentUser?.username ?? "NONE")")
         } catch {
-            print("Error laoding current user: \(error.localizedDescription)")
+            print("Error loading current user: \(error.localizedDescription)")
+        }
+    }
+    
+    func updateProfileImageUrl(_ imageUrl: String) async {
+        do {
+            try await service.updateProfileImageUrl(imageUrl)
+            self.currentUser?.profileImageUrl = imageUrl
+        } catch {
+            print("Error uploading profile image url: \(error.localizedDescription)")
         }
     }
 }
